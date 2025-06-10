@@ -37,6 +37,7 @@ It provides endpoints for:
   7. Start the Development Server
       python manage.py runserver
       The API will now be accessible at:👉 http://127.0.0.1:8000/
+      ✅ The database is already preloaded with sample data for classes and instructors to test the booking functionality.
 
 📄 API Documentation
   Interactive Swagger UI is available at:
