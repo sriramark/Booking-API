@@ -58,6 +58,6 @@ class BookingListView(generics.ListAPIView):
         return queryset.select_related(
             'scheduled_class',
             'scheduled_class__fitness_class',
-            'scheduled_class__fitness_class__instructor'
+            'scheduled_class__instructor'
         )
 

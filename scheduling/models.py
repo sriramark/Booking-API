@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from datetime import timedelta
 
 from fitness_class.models import FitnessClass
 from fitness_class.models import Instructor
@@ -25,6 +26,20 @@ class ScheduledClass(models.Model):
         return self.available_slots == 0
     
     def save(self, *args, **kwargs):
+        self.datetime = self.datetime.replace(second = 0, microsecond=0) # Remove seconds and microseconds for consistency
+       
+        # Enforce 30-minute gap between instructor's other classes
+        start_window = self.datetime - timedelta(minutes=30)
+        end_window = self.datetime + timedelta(minutes=30)
+        
+        overlapping_classes = ScheduledClass.objects.filter(
+            instructor=self.instructor,
+            datetime__range=(start_window, end_window)
+        ).exclude(pk=self.pk)
+
+        if overlapping_classes.exists():
+            raise ValidationError(f"{self.instructor.name} already has a class within 30 minutes of this time.")
+       
         fitness_class_instructors = self.fitness_class.instructors.all()
         if self.instructor not in fitness_class_instructors:
             raise ValidationError("Instructor must be one of the instructors for the fitness class.")

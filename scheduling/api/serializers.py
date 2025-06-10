@@ -47,16 +47,16 @@ class BookingCreateSerializer(serializers.ModelSerializer):
 class BookingDetailSerializer(serializers.ModelSerializer):
     class ScheduledClassSerializer(serializers.ModelSerializer):
         fitness_class_name = serializers.CharField(source='fitness_class.name', read_only=True)
-        instructor_name = serializers.CharField(source='fitness_class.instructor.name', read_only=True)
 
         class Meta:
             model = ScheduledClass
-            fields = ('id', 'title', 'datetime', 'fitness_class_name', 'instructor_name')
+            fields = ('id', 'title', 'datetime', 'fitness_class_name', )
 
     scheduled_class = ScheduledClassSerializer(read_only=True)
     is_past_booking = serializers.BooleanField(source='is_past', read_only=True)
+    instructor_name = serializers.CharField(source='scheduled_class.instructor.name', read_only=True)
 
     class Meta:
         model = Booking
-        fields = ('id', 'name', 'email', 'booking_time', 'scheduled_class', 'is_past_booking')
+        fields = ('id', 'name', 'email', 'booking_time', 'scheduled_class', 'is_past_booking', 'instructor_name')
 
