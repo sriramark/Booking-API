@@ -1,0 +1,6 @@
+# dependencies
+/env
+
+# Django specific
+__pycache__
+
