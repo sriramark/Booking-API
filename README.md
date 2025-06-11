@@ -42,5 +42,6 @@ It provides endpoints for:
 📄 API Documentation
   Interactive Swagger UI is available at:
   🔗 http://127.0.0.1:8000/swagger-ui/
+  Postman collection: https://www.postman.com/crimson-astronaut-106494/my-workspace/collection/kiuhv4v/fitness-booking-api?action=share&creator=25296448&active-environment=25296448-340b03ae-28ac-4619-afc3-277d432f2806
 
 Use this interface to explore endpoints, try out requests, and view response formats.
