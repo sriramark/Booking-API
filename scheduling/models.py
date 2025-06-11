@@ -70,7 +70,7 @@ class Booking(models.Model):
                 raise ValidationError("This class is fully booked.")
     
         if self.is_past:
-                raise ValidationError("Cannot book past classes.")
+            raise ValidationError("Cannot book past classes.")
         
         # Check for overlapping bookings for the same email
         overlapping = Booking.objects.filter(
